@@ -11,4 +11,6 @@ func main() {
 	task.AddTask(&init , "learn go" , false);
 
 	fmt.Println(init)
+
+	task.SaveToFile(init)
 }
