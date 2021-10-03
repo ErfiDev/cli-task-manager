@@ -8,9 +8,15 @@ import (
 func main() {
 	init := task.Task{}
 
-	task.AddTask(&init , "learn go" , false);
+	task.AddTask(&init , "learn go")
+	task.AddTask(&init , "learn java")
+
 
 	fmt.Println(init)
 
 	task.SaveToFile(init)
+
+	task.CompleteTask(init , 19727887)
+
+	fmt.Println(init)
 }

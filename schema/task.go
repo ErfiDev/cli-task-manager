@@ -1,23 +1,24 @@
 package task
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
-
-	//"io/ioutil"
-	"encoding/json"
 	"log"
+	"math/rand"
 )
 
-type Task []structure
+type Task []Structure
 
-type structure struct {
+type Structure struct {
 	Title string
 	IsDone bool
+	Id int
 }
 
-func AddTask(task *Task , title string , isDone bool) {
-	*task = append(*task , structure{title , isDone})
+func AddTask(task *Task , title string) {
+	hash := rand.Intn(100000000)
+	*task = append(*task , Structure{title , false , hash})
 }
 
 func SaveToFile(task Task) {
@@ -33,4 +34,23 @@ func SaveToFile(task Task) {
 			fmt.Println("file created");
 		}
 	}
+}
+
+func CompleteTask(tasks Task,id int) {
+	var index int
+	for ind , value := range tasks {
+		if value.Id == id {
+			index = ind
+			break
+		}else {
+			continue
+		}
+	}
+
+	find := tasks[index]
+	fmt.Println(find)
+
+	find.IsDone = true
+
+	tasks[index] = find
 }
