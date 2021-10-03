@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 )
 
 type Task []Structure
@@ -17,19 +16,20 @@ type Structure struct {
 
 func AddTask(task *Task , title string) {
 	*task = append(*task , Structure{title , false , len(*task)+1})
+	fmt.Println(*task)
 }
 
-func SaveToFile(task Task) {
+func SaveToFile(task Task) string {
 	json , err := json.Marshal(task)
 
 	if err != nil {
-		log.Fatal(err);
+		return "something wrong!"
 	} else {
 		err := ioutil.WriteFile("tasks.json" , json , 0644)
 		if err != nil {
-			log.Fatal(err)
+			return "something wrong!"
 		} else {
-			fmt.Println("file created");
+			return "success"
 		}
 	}
 }
@@ -46,7 +46,6 @@ func CompleteTask(tasks Task,id int) {
 	}
 
 	find := tasks[index]
-	fmt.Println(find)
 
 	find.IsDone = true
 
