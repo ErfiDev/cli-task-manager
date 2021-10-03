@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	task "github.com/erfidev/task-manager-golang/schema"
+	task "github.com/erfidev/golang-task-manager/schema"
 )
 
 func main() {
