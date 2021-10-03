@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"math/rand"
 )
 
 type Task []Structure
@@ -17,8 +16,7 @@ type Structure struct {
 }
 
 func AddTask(task *Task , title string) {
-	hash := rand.Intn(100000000)
-	*task = append(*task , Structure{title , false , hash})
+	*task = append(*task , Structure{title , false , len(*task)+1})
 }
 
 func SaveToFile(task Task) {
