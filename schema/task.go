@@ -16,7 +16,6 @@ type Structure struct {
 
 func AddTask(task *Task , title string) {
 	*task = append(*task , Structure{title , false , len(*task)+1})
-	fmt.Println(*task)
 }
 
 func SaveToFile(task Task) string {
