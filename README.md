@@ -1,6 +1,8 @@
 # Task Manager
 
-write by erfanhanifezade@gmail.com with go programming language
-and cobra framework based on command-line
+app for managing tasks, add, complete, remove 
+and read based on command-line-interface (cli)
 
-
+stacks:
+- go programming language
+- cobra framework
