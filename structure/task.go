@@ -2,7 +2,9 @@ package structure
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 )
 
@@ -61,4 +63,43 @@ func ReadTasks(by string) ([]*Task, error) {
 	}
 
 	return readFiles , nil
+}
+
+func CompleteTask(id string) (bool, error) {
+	files, err := ioutil.ReadDir("./db")
+	if err != nil {
+		return false, err
+	}
+
+	for _, val := range files {
+		file, err := ioutil.ReadFile("./db/"+val.Name())
+		if err != nil {
+			return false, err
+		}
+
+		var unMarshalFile Task
+		err = json.Unmarshal(file, &unMarshalFile)
+		if err != nil {
+			return false, err
+		}
+
+		if unMarshalFile.Id == id {
+			// writing again this file by changing idDone = to true
+			if unMarshalFile.IsDone {
+				return false, errors.New("the task are done")
+			}
+
+			unMarshalFile.IsDone = true
+			newData, err := json.Marshal(unMarshalFile)
+			if err != nil {
+				return false, err
+			}
+			err = ioutil.WriteFile("./db/"+ val.Name(), newData, fs.ModeAppend)
+			if err != nil {
+				return false, err
+			}
+		}
+	}
+
+	return true, nil
 }

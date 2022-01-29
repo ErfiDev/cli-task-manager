@@ -31,9 +31,10 @@ var readCmd = &cobra.Command{
 
 				if len(tasks) > 0 {
 					for _, val := range tasks {
-						fmt.Println("------------------------------")
+						//fmt.Println("------------------------------")
 						fmt.Println("title: ", val.Title)
-						fmt.Println("is done?: ", val.IsDone)
+						fmt.Println("is done: ", val.IsDone)
+						fmt.Println("unique id: ", val.Id)
 						fmt.Println("------------------------------")
 					}
 					return
