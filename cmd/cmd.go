@@ -17,9 +17,12 @@ func Exec() {
 
 	completeCmd.Flags().StringVarP(&taskId, "id", "i", "", "for finding intended task")
 
+	removeCmd.Flags().StringVarP(&taskId, "id", "i", "", "for finding intended task and deleting")
+
 	rootCmd.AddCommand(addCmd)
 	rootCmd.AddCommand(readCmd)
 	rootCmd.AddCommand(completeCmd)
+	rootCmd.AddCommand(removeCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalf("Error on executing root command: %s", err)

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/fs"
 	"io/ioutil"
+	"os"
 )
 
 type Task struct {
@@ -103,3 +104,33 @@ func CompleteTask(id string) (bool, error) {
 
 	return true, nil
 }
+
+func RemoveTask(id string) (bool, error) {
+	files, err := ioutil.ReadDir("./db")
+	if err != nil {
+		return false, err
+	}
+
+	for _, val := range files {
+		file, err := ioutil.ReadFile("./db/"+val.Name())
+		if err != nil {
+			return false, err
+		}
+
+		var unMarshalFile Task
+		err = json.Unmarshal(file, &unMarshalFile)
+		if err != nil {
+			return false, err
+		}
+
+		if unMarshalFile.Id == id {
+			err := os.Remove("./db/"+val.Name())
+			if err != nil {
+				return false, err
+			}
+		}
+	}
+
+	return true, nil
+}
+
