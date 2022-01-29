@@ -1,0 +1,9 @@
+node_modules/
+.env
+build
+.yaml
+.yml
+.toml
+.tml
+.idea
+.vscode
